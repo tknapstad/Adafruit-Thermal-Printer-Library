@@ -26,7 +26,11 @@
 // integerized, e.g. 268 = 2.68 firmware.
 #define PRINTER_FIRMWARE 268
 
-#include "Arduino.h"
+#if defined(ARDUINO) && ARDUINO >= 100
+    #include "Arduino.h"
+#elif defined(SPARK) // Particle (previously Spark) Core, Photon, Electron
+    #include "application.h"
+#endif
 
 // Barcode types and charsets
 #if PRINTER_FIRMWARE >= 264

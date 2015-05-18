@@ -52,6 +52,11 @@
 // be unnecessary, but erring on side of caution here.
 #define BYTE_TIME (((11L * 1000000L) + (BAUDRATE / 2)) / BAUDRATE)
 
+// The Particle boards don't support pgm_read_byte
+#if defined(SPARK)
+    #define pgm_read_byte(BITMAP) ((*BITMAP))
+#endif
+
 // Constructor
 Adafruit_Thermal::Adafruit_Thermal(Stream *s, uint8_t dtr) :
   stream(s), dtrPin(dtr) {
